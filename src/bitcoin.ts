@@ -62,8 +62,8 @@ if (process.env.ION_BITCOIN_CONFIG_FILE_PATH === undefined) {
   console.log((`Environment variable ION_BITCOIN_CONFIG_FILE_PATH undefined, using default path ${configFilePath} instead.`));
 } else {
   configFilePath = process.env.ION_BITCOIN_CONFIG_FILE_PATH;
-  console.log(LogColor.lightBlue(`Loading configuration from ${LogColor.green(configFilePath)}...`));
 }
+  console.log((`Loading configuration from ${(configFilePath)}...`));
 const config: IBitcoinServiceConfig = require(configFilePath);
 
 // see if there are overrides for the service endpoints with env vars
@@ -100,7 +100,7 @@ if (process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH === undefined) {
   ));
 } else {
   versioningConfigFilePath = process.env.ION_BITCOIN_VERSIONING_CONFIG_FILE_PATH;
-  console.log(LogColor.lightBlue(`Loading ION bitcoin versioning config from ${LogColor.green(versioningConfigFilePath)}...`));
+  console.log((`Loading ION bitcoin versioning config from ${(versioningConfigFilePath)}...`));
 }
 const ionBitcoinVersions: SidetreeBitcoinVersionModel[] = require(versioningConfigFilePath);
 

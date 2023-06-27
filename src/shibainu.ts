@@ -1,31 +1,52 @@
+
+//https://tsmatz.wordpress.com/2020/09/01/did-sidetree-ion/
+//As I show you later, this process (default port 3002) will extract all transactions from Bitcoin core and check whether it’s a sidetree transaction for each transactions. Because of this, it will take a lot of time to
+
+
+//in this file /ion_shibainu/src/shibainu.ts search the keyworks 
+//transaction 
+//writeTransaction
+//anchorString
+
+
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import * as getRawBody from 'raw-body';
 import * as querystring from 'querystring';
-//import {  ISidetreeBitcoinConfig,  SidetreeBitcoinProcessor,  SidetreeBitcoinVersionModel} from '@decentralized-identity/sidetree';
+import {  ISidetreeBitcoinConfig,  SidetreeBitcoinProcessor,  SidetreeBitcoinVersionModel} from '@decentralized-identity/sidetree';
 
-//file:///media/ubuntu/shareddir1/karametron/ion_001/ion/src/sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/bitcoin/IBitcoinConfig
-
-//import {  ISidetreeBitcoinConfig } from './sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/bitcoin/IBitcoinConfig';
-
-//import   SidetreeBitcoinProcessor from './sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/index.js';
+/*
+ file:///media/ubuntu/shareddir1/karametron/ion_001/ion/src/sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/bitcoin/IBitcoinConfig
+*/ 
 
 
-//import {  ISidetreeBitcoinConfig,  SidetreeBitcoinProcessor,  SidetreeBitcoinVersionModel} from './sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/index';
+/*
+ file:///media/ubuntu/shareddir1/karametron/ion_001/ion/src/sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/bitcoin/IBitcoinConfig
+*/ 
 
 
 
+
+//import {  ISidetreeBitcoinConfig,  SidetreeBitcoinProcessor,  SidetreeBitcoinVersionModel} from './sidetree-reference-impl/lib/index';
+
+
+
+
+//import {  ISidetreeBitcoinConfig } from './sidetree-referenced-impl/lib/bitcoin/IBitcoinConfig';
+
+//import   SidetreeBitcoinProcessor from './sidetree-referenced-impl/lib/index.js';
+
+
+//import {  ISidetreeBitcoinConfig,  SidetreeBitcoinProcessor,  SidetreeBitcoinVersionModel} from './sidetree-referenced-impl/lib/index';
+
+/*
 import ISidetreeBitcoinConfig from "./sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/bitcoin/IBitcoinConfig";
 
+import { SidetreeBitcoinProcessor } from "./sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/index";
 
 
-
-
-import { SidetreeBitcoinProcessor } from "/media/ubuntu/shareddir1/karametron/ion_001/ion/src/sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/index";
-
-
-import { SidetreeBitcoinVersionModel } from "/media/ubuntu/shareddir1/karametron/ion_001/ion/src/sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/index";
-
+import { SidetreeBitcoinVersionModel } from "./sidetree-referenced-impl-1.0.6-unstable.5e20ddf/dist/lib/index";
+*/
 
 
 
@@ -85,15 +106,21 @@ async function handleRequestAndSetKoaResponse (requestHandler: () => Promise<any
   }
 }
 
+
+console.log(`\n\n`)
+console.log(`[msg from ion/src/shibainu.ts]. check1 ok. \n\n`)
+
 // Selecting configuration file, environment variable overrides default config file.
 let configFilePath = '../config/testnet-shibainu-config.json';
 if (process.env.SHIBAINU_CONFIG_FILE_PATH === undefined) {
-  console.log((`[msg from ion/src/shibainu.ts]. Environment variable SHIBAINU_CONFIG_FILE_PATH undefined, using default path ${configFilePath} instead.`));
+  console.log((`[msg from ion/src/shibainu.ts]. msg10. Environment variable SHIBAINU_CONFIG_FILE_PATH undefined, using default path ${configFilePath} instead.\n\n`));
 } else {
   configFilePath = process.env.SHIBAINU_CONFIG_FILE_PATH;
-  console.log(LogColor.lightBlue(`[msg from ion/src/shibainu.ts]. Loading configuration from ${LogColor.green(configFilePath)}...`));
+  console.log((`[msg from ion/src/shibainu.ts]. msg11. Loading configuration from ${(configFilePath)}...\n\n`));
 }
 const config: ICustomCoinServiceConfig = require(configFilePath);
+console.log(`\n\n`)
+console.log(`[msg from ion/src/shibainu.ts]. check2 ok. \n\n`)
 
 // see if there are overrides for the service endpoints with env vars
 const bitcoinDataDirectoryEnv = process.env.SHIBAINU_DATA_DIR;
@@ -121,17 +148,28 @@ if (mongoEndpointEnv !== undefined) {
   config.mongoDbConnectionString = mongoEndpointEnv;
 }
 
+
+
+console.log(`\n\n`)
+console.log(`[msg from ion/src/shibainu.ts]. check3 ok. \n\n`)
+
 // Selecting versioning file, environment variable overrides default config file.
 let versioningConfigFilePath = '../config/testnet-shibainu-versioning.json';
 if (process.env.ION_SHIBAINU_VERSIONING_CONFIG_FILE_PATH === undefined) {
+  console.log('\n\n')
   console.log((
-    `[msg from ion/src/shibainu.ts]. Environment variable ION_SHIBAINU_VERSIONING_CONFIG_FILE_PATH undefined, using default ION Shibainu versioning config path ${versioningConfigFilePath}.`
+    `[msg from ion/src/shibainu.ts]. msg12. Environment variable ION_SHIBAINU_VERSIONING_CONFIG_FILE_PATH undefined, using default ION Shibainu versioning config path ${versioningConfigFilePath}.\n\n`
   ));
 } else {
   versioningConfigFilePath = process.env.ION_SHIBAINU_VERSIONING_CONFIG_FILE_PATH;
-  console.log(LogColor.lightBlue(`[msg from ion/src/shibainu.ts]. Loading ION Shibainu versioning config from ${LogColor.green(versioningConfigFilePath)}...`));
+  console.log((`[msg from ion/src/shibainu.ts]. msg13. Loading ION Shibainu versioning config from ${(versioningConfigFilePath)}...\n\n`));
 }
 const ionBitcoinVersions: SidetreeBitcoinVersionModel[] = require(versioningConfigFilePath);
+
+console.log(`\n\n`)
+console.log(`[msg from ion/src/shibainu.ts]. check4 ok. \n\n`)
+
+
 
 const app = new Koa();
 
@@ -143,6 +181,13 @@ app.use(async (ctx, next) => {
 
 const router = new Router();
 
+
+//###############################################//
+//###############################################//
+//###############################################//
+//###############################################//
+//transaction
+//routing.start
 router.get('/transactions', async (ctx, _next) => {
   const params = querystring.parse(ctx.querystring);
 
@@ -168,6 +213,9 @@ router.get('/fee/:blockchainTime', async (ctx, _next) => {
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
+
+//transaction
+//anchorString
 router.post('/transactions', async (ctx, _next) => {
   const writeRequest = JSON.parse(ctx.body);
   const requestHandler = () => blockchainService.writeTransaction(writeRequest.anchorString, writeRequest.minimumFee);
@@ -205,6 +253,7 @@ router.get('/monitors/balance', async (ctx, _next) => {
   await handleRequestAndSetKoaResponse(requestHandler, ctx.response);
 });
 
+
 app.use(router.routes())
   .use(router.allowedMethods());
 
@@ -215,35 +264,112 @@ app.use((ctx, _next) => {
 
 const port = process.env.SIDETREE_SHIBAINU_PORT || config.port;
 
-// initialize the blockchain service and kick-off background tasks
+
+console.log(`\n\n`)
+console.log(`[msg from ion/src/shibainu.ts]. check5 ok. \n\n`)
+//###########################################
+//routing.end
+
+
+
+
+
+
+//###########################################
+// initialize the blockchain service and kick-off background tasks. start
 let server: any;
 let blockchainService: SidetreeBitcoinProcessor;
+    
 try {
+    
+  console.log(`[msg from ion/src/shibainu.ts]. check5a.1 ok. \n\n`)
+  
+  /*
+   * source code of SidetreeBitcoinProcessor
+   * sidetree-reference-impl/lib/index.ts
+   * import SidetreeBitcoinProcessor from './bitcoin/BitcoinProcessor';
+   */
+  
+  //SidetreeBitcoinProcessor() logging: Creating bitcoin wallet using the import string passed in.
   blockchainService = new SidetreeBitcoinProcessor(config);
+  console.log(`[msg from ion/src/shibainu.ts]. check5a.2 ok. \n\n`)
+  
+} catch (error) {
+  console.log('\n\n');
+  console.log('[msg from ion/src/shibainu.ts] catch error91');
+  console.log('[msg from ion/src/shibainu.ts] msg58. ' + error.toString());
 
+  console.log('\n\n');
+  console.log('process.exit error91');  
+  console.log('\n\n');
+  
+  process.exit(1);
+}
+  
+  
+
+  
+  
+  
+try {
   // SIDETREE_TEST_MODE enables unit testing of this file by bypassing blockchain service initialization.
   if (process.env.SIDETREE_TEST_MODE === 'true') {
     server = app.listen(port);
+    console.log(`[msg from ion/src/shibainu.ts]. check5b ok. \n\n`)
   } else {
+
+      
+    console.log(`[msg from ion/src/shibainu.ts]. check5c ok. \n\n`)
+      
     blockchainService.initialize(ionBitcoinVersions)
       .then(() => {
         server = app.listen(port, () => {
-          console.log(`[msg from ion/src/shibainu.ts]. Sidetree-Shibainu node running on port: ${port}`);
+          console.log('\n\n');
+          console.log(`[msg from ion/src/shibainu.ts]. msg20. Sidetree-Shibainu node running on port: ${port}`);
         });
       })
       .catch((error) => {
-        console.error(`[msg from ion/src/shibainu.ts]. Sidetree-Shibainu node initialization failed with error: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
+        console.log('\n\n');
+        console.error(`[msg from ion/src/shibainu.ts]. msg21. Sidetree-Shibainu node initialization failed with error: ${JSON.stringify(error, Object.getOwnPropertyNames(error))}`);
+        
+        
+        blockchainService
         process.exit(1);
       });
   }
+  console.log(`[msg from ion/src/shibainu.ts]. check5d ok. \n\n`)
+  
 } catch (error) {
+  console.log('\n\n');
+  console.log('[msg from ion/src/shibainu.ts] catch error432');
   console.log('[msg from ion/src/shibainu.ts] msg54. ' + error.toString());
-  console.log('[msg from ion/src/shibainu.ts] msg55. ' + 'Is bitcoinWalletOrImportString (old bitcoinWalletOrImportString) valid? Consider using testnet key generated below:');
-  console.log('[msg from ion/src/shibainu.ts]. msg56. ' + SidetreeBitcoinProcessor.generatePrivateKeyForTestnet());
+  
+  //../config/testnet-shibainu-config.json
+  //../config/testnet-shibainu-versioning.json
+  console.log('\n\n');
+  console.log('[msg from ion/src/shibainu.ts] msg55. ' + 'Is bitcoinWalletOrImportString  valid? Consider using testnet key generated below:');
+  console.log('[msg from ion/src/shibainu.ts]. msg56. ' + SidetreeBitcoinProcessor.generatePrivateKeyForTestnet()); 
+  
+  console.log('\n\n');
+  
+  console.log('[msg from ion/src/shibainu.ts] msg57. ');
+  console.log('Check bitcoinWalletOrImportString  in [config/testnet-shibainu-config.json]');
+  console.log('[DEV]. Check bitcoinWalletOrImportString  in [sidetree-reference-impl/lib/bitcoin/IBitcoinConfig.ts]');  
+  console.log('[DEV]. Check IBitcoinConfig in [sidetree-reference-impl/lib/index.ts]');  
+  console.log('[DEV]. Check IBitcoinConfig in [sidetree-reference-impl/lib/index.ts]');  
+
+  console.log('\n\n');
+  console.log('process.exit error432');  
+  console.log('\n\n');
+  
   process.exit(1);
 }
 console.info('[msg from ion/src/shibainu.ts]. msg57. '+ 'Sidetree Shibainu service configuration:');
 // console.info(config);
+
+console.log(`\n\n`)
+console.log(`[msg from ion/src/shibainu.ts]. check6 ok. \n\n`)
+
 
 export {
   server,

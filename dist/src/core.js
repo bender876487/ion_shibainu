@@ -14,7 +14,7 @@ const Router = require("koa-router");
 const getRawBody = require("raw-body");
 const sidetree_1 = require("@decentralized-identity/sidetree");
 const Ipfs_1 = require("@decentralized-identity/sidetree/dist/lib/ipfs/Ipfs");
-//const LogColor_1 = require("../bin/LogColor");
+////import LogColor from '../bin/LogColor';
 const ResponseStatus_1 = require("@decentralized-identity/sidetree/dist/lib/common/enums/ResponseStatus");
 // Selecting core config file, environment variable overrides default config file.
 let configFilePath = '../config/testnet-core-config.json';

@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const ion_sdk_1 = require("@decentralized-identity/ion-sdk");
 const fs = require("fs");
-//const LogColor_1 = require("./LogColor");
+const LogColor_1 = require("./LogColor");
 /**
  * Class that handles the `operation` CLI command.
  */
@@ -33,8 +33,8 @@ class OperationCommand {
             const longFormDid = ion_sdk_1.IonDid.createLongFormDid(input);
             const shortFormDid = longFormDid.substring(0, longFormDid.lastIndexOf(':'));
             const didSuffix = shortFormDid.substring(shortFormDid.lastIndexOf(':') + 1);
+            console.info(LogColor_1.default.lightBlue(`DID: `) + (`${shortFormDid}`));
             console.info('');
-            console.info((`DID: `) + (`${shortFormDid}`));
             // Save all private keys.
             const recoveryKeyFileName = `${didSuffix}-RecoveryPrivateKey.json`;
             const updateKeyFileName = `${didSuffix}-UpdatePrivateKey.json`;
@@ -42,20 +42,20 @@ class OperationCommand {
             fs.writeFileSync(recoveryKeyFileName, JSON.stringify(recoveryPrivateKey));
             fs.writeFileSync(updateKeyFileName, JSON.stringify(updatePrivateKey));
             fs.writeFileSync(signingKeyFileName, JSON.stringify(signingPrivateKey));
-            console.info((`Recovery private key saved as: ${(recoveryKeyFileName)}`));
-            console.info((`Update private key saved as: ${(updateKeyFileName)}`));
-            console.info((`Signing private key saved as: ${(signingKeyFileName)}`));
+            console.info(LogColor_1.default.brightYellow(`Recovery private key saved as: ${(recoveryKeyFileName)}`));
+            console.info(LogColor_1.default.brightYellow(`Update private key saved as: ${(updateKeyFileName)}`));
+            console.info(LogColor_1.default.brightYellow(`Signing private key saved as: ${(signingKeyFileName)}`));
             console.info('');
-            console.info((`Create request body:`));
+            console.info(LogColor_1.default.lightBlue(`Create request body:`));
             console.info(JSON.stringify(createRequest, null, 2)); // 2 space indents.
             console.info('');
-            console.info((`Long-form DID:`));
+            console.info(LogColor_1.default.lightBlue(`Long-form DID:`));
             console.info(longFormDid);
             console.info('');
-            console.info((`DID suffix data:`));
+            console.info(LogColor_1.default.lightBlue(`DID suffix data:`));
             console.info(JSON.stringify(createRequest.suffixData, null, 2));
             console.info('');
-            console.info((`Document delta:`));
+            console.info(LogColor_1.default.lightBlue(`Document delta:`));
             console.info(JSON.stringify(createRequest.delta, null, 2));
             console.info('');
         });

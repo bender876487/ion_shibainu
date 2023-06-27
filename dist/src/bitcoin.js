@@ -15,7 +15,6 @@ const Router = require("koa-router");
 const getRawBody = require("raw-body");
 const querystring = require("querystring");
 const sidetree_1 = require("@decentralized-identity/sidetree");
-//const LogColor_1 = require("../bin/LogColor");
 /**
  * Handles the request using the given request handler then assigns the returned value as the body.
  * NOTE: The value of this method is really the unified handling of errors thrown.
@@ -63,8 +62,8 @@ if (process.env.ION_BITCOIN_CONFIG_FILE_PATH === undefined) {
 }
 else {
     configFilePath = process.env.ION_BITCOIN_CONFIG_FILE_PATH;
-    console.log((`Loading configuration from ${(configFilePath)}...`));
 }
+console.log((`Loading configuration from ${(configFilePath)}...`));
 const config = require(configFilePath);
 // see if there are overrides for the service endpoints with env vars
 const bitcoinDataDirectoryEnv = process.env.BITCOIN_DATA_DIR;
@@ -164,9 +163,7 @@ app.use((ctx, _next) => {
 const port = process.env.SIDETREE_BITCOIN_PORT || config.port;
 // initialize the blockchain service and kick-off background tasks
 let server;
-exports.server = server;
 let blockchainService;
-exports.blockchainService = blockchainService;
 try {
     exports.blockchainService = blockchainService = new sidetree_1.SidetreeBitcoinProcessor(config);
     // SIDETREE_TEST_MODE enables unit testing of this file by bypassing blockchain service initialization.

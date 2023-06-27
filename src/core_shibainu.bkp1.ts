@@ -27,7 +27,7 @@ if (process.env.ION_CORE_SHIBAINU_CONFIG_FILE_PATH === undefined) {
   console.log((`MSG545. Environment variable ION_CORE_SHIBAINU_CONFIG_FILE_PATH undefined, using default core config path ${configFilePath} instead.`));
 } else {
   configFilePath = process.env.ION_CORE_SHIBAINU_CONFIG_FILE_PATH;
-  console.log(LogColor.lightBlue(`MSG545. Loading core config from ${LogColor.green(configFilePath)}...`));
+  console.log((`MSG545. Loading core config from ${(configFilePath)}...`));
 }
 const config: ServerConfig = require(configFilePath);
 
@@ -39,7 +39,7 @@ if (process.env.ION_CORE_SHIBAINU_VERSIONING_CONFIG_FILE_PATH === undefined) {
   ));
 } else {
   versioningConfigFilePath = process.env.ION_CORE_SHIBAINU_VERSIONING_CONFIG_FILE_PATH;
-  console.log(LogColor.lightBlue(`MSG545. Loading core versioning config from ${LogColor.green(versioningConfigFilePath)}...`));
+  console.log((`MSG545. Loading core versioning config from ${(versioningConfigFilePath)}...`));
 }
 const coreVersions: SidetreeVersionModel[] = require(versioningConfigFilePath);
 
